@@ -185,6 +185,9 @@ rerunningTests ingredients =
         go prefix (Tasty.AskOptions k) =
           Tasty.AskOptions (go prefix <$> k)
 
+        go prefix (Tasty.After depType expr t) =
+          Tasty.After depType expr (go prefix t)
+
     in go [] testTree
 
   tryLoadStateFrom filePath = do
